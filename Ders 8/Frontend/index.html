@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Frontend - Veri Tüketimi</title>
+</head>
+<body>
+    <!-- 
+    ==========================================
+    FRONTEND (VERİYİ TÜKETEN VE ANLAMLANDIRAN KISIM) - GARSON
+    ========================================== 
+    Frontend, Backend'in ürettiği ham JSON verisini alır, 
+    son kullanıcının (User) okuyabileceği ve anlayabileceği bir HTML yapısına (Görselliğe) dönüştürür.
+    -->
+    
+    <h2>Sistemdeki Kullanıcılar</h2>
+    <ul id="userList">
+        <!-- Veriler JavaScript ile buraya eklenecek -->
+    </ul>
+
+    <script>
+        // 1. İSTEK ATMA (Siparişi Verme): 
+        // Frontend, garson gibi Backend'in dışarıya açtığı kapıya (API Endpoint) gider.
+        // Not: localhost:5001 kısmı Backend'in çalıştığı adrestir.
+        fetch('https://localhost:5001/api/users')
+            
+            // 2. VERİYİ TESLİM ALMA (Yemeği Mutfaktan Alma):
+            .then(response => response.json()) 
+            
+            // 3. ANLAMLANDIRMA VE TÜKETME (Yemeği Masaya Sunma):
+            .then(data => {
+                const ul = document.getElementById('userList');
+                
+                // Gelen ham JSON "Data"sı döngüye sokuluyor
+                data.forEach(user => {
+                    // Her bir kullanıcı için yeni bir liste elemanı (HTML) oluşturuluyor
+                    const li = document.createElement('li');
+                    
+                    // Backend'in ürettiği Name ve Role verileri alınarak anlamlı bir metne dönüştürülüyor
+                    li.textContent = `Adı: ${user.Name} - Yetkisi: ${user.Role}`;
+                    
+                    // Ekrana çiziliyor (Render)
+                    ul.appendChild(li);
+                });
+                
+                console.log("Backend'den gelen saf JSON verisi başarıyla tüketildi:", data);
+            })
+            .catch(error => {
+                console.error("API'ye ulaşılamadı (Aşçı/Backend şu an kapalı olabilir).", error);
+            });
+    </script>
+</body>
+</html>
