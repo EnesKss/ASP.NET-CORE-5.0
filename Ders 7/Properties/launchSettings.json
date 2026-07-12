@@ -1,0 +1,44 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:54321",
+      "sslPort": 44300
+    }
+  },
+  "profiles": {
+    // ==========================================
+    // 1. IIS Express Profili (Reverse Proxy Simülasyonu)
+    // ==========================================
+    // "commandName": "IISExpress" olarak ayarlandığında:
+    // Proje Visual Studio'da çalıştırıldığında arka planda Windows'a özel 
+    // hafifletilmiş bir IIS sunucusu ayağa kalkar. Gelen istekleri önce bu IIS Express 
+    // karşılar ve ardından içerideki (built-in) Kestrel sunucusuna iletir.
+    // Canlı ortamdaki (Production) IIS + Kestrel (Ters Vekil) mimarisini simüle etmek için mükemmeldir.
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    
+    // ==========================================
+    // 2. Kestrel (Project) Profili (Doğrudan Kestrel)
+    // ==========================================
+    // "commandName": "Project" olarak ayarlandığında:
+    // Uygulama hiçbir vekil sunucu (IIS) arkasında çalışmaz. Doğrudan siyah bir 
+    // konsol (Terminal) ekranı açılır ve sadece 'Kestrel' uç sunucusu üzerinden ayağa kalkar.
+    // Cross-platform geliştirme yaparken (Örn: Mac veya Linux'ta) IIS olmadığı için bu profil kullanılır.
+    "App": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
