@@ -1,0 +1,46 @@
+@* 
+    ==========================================
+    VIEW KATMANI (Sunum ve Arayüz)
+    ========================================== 
+    @model tanımı: Bu View'un Controller'dan hangi veri tipini beklediğini (Kabul Ettiğini) söyler.
+    Controller'dan bir 'Liste (IEnumerable)' halinde 'Employee' verisi geleceğini deklare ettik.
+*@
+@model IEnumerable<App.Models.Employee>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Personel Listesi</title>
+</head>
+<body>
+    <h2>Şirket Personelleri</h2>
+
+    <!-- View katmanı, Controller'dan (arka plandan) gelen C# modelini alıp HTML'e dönüştürür. -->
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ad Soyad</th>
+                <th>Departman</th>
+                <th>Maaş</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* 
+                Razor Engine (@ sembolü): C# kodları ile HTML etiketlerini iç içe sorunsuz kullanmamızı sağlar.
+                Model nesnesi, Controller'daki 'return View(employeeList)' kodundan gelen listedir.
+            *@
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.Id</td>
+                    <td>@emp.FullName</td>
+                    <td>@emp.Department</td>
+                    <td>@emp.Salary ₺</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
