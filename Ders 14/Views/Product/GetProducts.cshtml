@@ -1,0 +1,33 @@
+@* 
+    "Convention over Configuration" Kuralı 3:
+    Bu dosyanın FİZİKSEL DOSYA YOLU kesinlikle şu olmalıdır:
+    ProjeDizini -> Views -> Product -> GetProducts.cshtml 
+    Eğer klasör veya dosya adında bir harf bile yanlış olursa sistem bu dosyayı bulamaz (Hata fırlatır).
+
+    @model: Controller'ın 'return View(urun);' koduyla fırlattığı nesneyi 
+    bu View'un "Product" tipinde karşılayacağını (Kabul Edeceğini) sisteme söyler.
+*@
+
+@model App.Models.Product
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ürün Detayı</title>
+</head>
+<body>
+    <h2>Ürün Bilgileri Ekranı (View)</h2>
+    <hr />
+
+    <!-- Arka plandaki C# nesnesinden (Model) gelen dinamik verilerin HTML üzerine basılması -->
+    <div>
+        <strong>Ürün ID:</strong> @Model.Id <br />
+        <strong>Ürün Adı:</strong> @Model.Name <br />
+        <strong>Fiyatı:</strong> @Model.Price ₺
+    </div>
+
+    <br />
+    <p><em>Not: Bu sayfa MVC'nin Geleneksel Kuralları (Convention) sayesinde otomatik olarak bulunup ekrana çizilmiştir.</em></p>
+</body>
+</html>
