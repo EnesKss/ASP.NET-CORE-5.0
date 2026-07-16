@@ -1,0 +1,35 @@
+@* 
+    TUPLE MODEL KARŞILAMA İMZASI
+    Buradaki @model tanımı sıradan bir class değil, bir Tuple'dır.
+    Parantez içinde Controller'dan gelen formatın BİREBİR AYNISINI yazmak zorundayız.
+    's' ve 'c' isimlendirmeleri sayesinde aşağıda Item1 veya Item2 yerine
+    doğrudan Model.s ve Model.c diyerek verilere ulaşacağız.
+*@
+@model (App.Models.Student s, App.Models.Course c)
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Öğrenci - Kurs Portalı</title>
+</head>
+<body>
+    <h2>Tuple (Çoklu Nesne) Taşıma Senaryosu</h2>
+    <hr />
+
+    <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin-bottom:20px;">
+        <h3>Öğrenci Bilgileri (Model.s)</h3>
+        <!-- İsimlendirilmiş Tuple sayesinde Intellisense (kod tamamlama) burada çalışır. -->
+        <p><strong>Numarası:</strong> @Model.s.Id</p>
+        <p><strong>Adı Soyadı:</strong> @Model.s.FullName</p>
+    </div>
+
+    <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #28a745;">
+        <h3>Kayıtlı Olduğu Kurs (Model.c)</h3>
+        <p><strong>Kurs Kodu:</strong> @Model.c.CourseId</p>
+        <p><strong>Kurs Adı:</strong> @Model.c.Title</p>
+        <p><strong>Kredi Puanı:</strong> @Model.c.Credit</p>
+    </div>
+
+</body>
+</html>

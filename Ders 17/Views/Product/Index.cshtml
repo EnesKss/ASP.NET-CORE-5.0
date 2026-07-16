@@ -1,0 +1,55 @@
+@* 
+    STRONGLY-TYPED MODEL TANIMLAMASI:
+    Controller'ın 'return View(productList)' ile fırlattığı Listeyi 
+    güvenli (Tipli) bir şekilde karşıladığımızı deklare ediyoruz. 
+*@
+@model IEnumerable<App.Models.Product>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    @* ViewBag.Title verisi okunuyor (Dinamik Başlık) *@
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h2>@ViewBag.Title</h2>
+    <hr />
+
+    @* 
+        TEMPDATA KONTROLÜ VE OKUNMASI
+        Eğer kullanıcı Create Action'ından yönlendirilerek (Redirect) bu sayfaya düştüyse 
+        TempData doludur. TempData okunduğu an (ekrana basıldığı an) görevini tamamlar 
+        ve arka planda Cookie'den otomatik olarak silinir.
+    *@
+    @if (TempData["Message"] != null)
+    {
+        <div style="background-color: #d4edda; color: #155724; padding: 15px; border: 1px solid #c3e6cb; margin-bottom: 20px;">
+            <strong>Bilgi:</strong> @TempData["Message"]
+        </div>
+    }
+
+    <!-- STRONGLY-TYPED MODEL İLE HTML TABLOSU (RENDER) -->
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 50%; text-align: left;">
+        <thead style="background-color: #f2f2f2;">
+            <tr>
+                <th>ID</th>
+                <th>Ürün Adı</th>
+                <th>Fiyatı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* Model (Liste) üzerinde dönerek her bir ürün için HTML satırı (TR) üretiyoruz *@
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price ₺</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>
